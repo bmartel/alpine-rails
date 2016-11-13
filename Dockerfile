@@ -2,7 +2,7 @@ FROM alpine:3.4
 
 MAINTAINER Brandon Martel <brandonmartel@gmail.com>
 
-ENV BUILD_PACKAGES="curl-dev ruby-dev build-base" \
+ENV BUILD_PACKAGES="curl-dev ruby-dev build-base imagemagick" \
     DEV_PACKAGES="zlib-dev libxml2-dev libxslt-dev tzdata yaml-dev sqlite-dev postgresql-dev mysql-dev" \
     RUBY_PACKAGES="ruby ruby-io-console ruby-json yaml nodejs" \
     RAILS_VERSION="5.0.0.1"
@@ -10,7 +10,7 @@ ENV BUILD_PACKAGES="curl-dev ruby-dev build-base" \
 RUN \
   apk --update --upgrade add $BUILD_PACKAGES $RUBY_PACKAGES $DEV_PACKAGES && \
   gem install -N bundler
-  
+
 RUN gem install -N nokogiri -- --use-system-libraries && \
   gem install -N rails --version "$RAILS_VERSION" && \
   echo 'gem: --no-document' >> ~/.gemrc && \
